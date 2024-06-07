@@ -1,0 +1,2 @@
+#TODO: Check for existance of the flatpak version of firefox (Flatpak preferred, maybe check for native installs?)
+#TODO: Run some commands to create the non-steam game shortcuts (Check for existing steam install? Any differences for steam deck config?) 
