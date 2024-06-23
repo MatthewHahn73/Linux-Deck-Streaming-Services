@@ -7,5 +7,5 @@
     # Apple TV - https://tv.apple.com/
 
 LINK="$1"
-source ./Config/cloud.conf
+source ./Config/Streaming.conf
 "/usr/bin/flatpak" run ${FLATPAKOPTIONS} ${BROWSERAPP} @@u @@ ${BROWSEROPTIONS} ${LINK}
