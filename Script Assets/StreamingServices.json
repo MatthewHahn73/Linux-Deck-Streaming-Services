@@ -1,0 +1,52 @@
+{
+    "Prime Video" : {
+        "Link" : "https://www.amazon.com/video", 
+        "Artwork" : {
+            "grid - Vertical" : "10c8f12e1fb3ed73b09ec0311a269a42.png", 
+            "grid - Horizontal" : "e152ea66175587989ee431b09e85b337.png", 
+            "hero" : "304cb49033bca92dc8391e133ef1d750.png", 
+            "logo" : "58840eb65da053fbdea5f4d19dd3e00f.png", 
+            "icon" : "f64b2463cf1dba199491c885dff932f3.ico"
+        }
+    },
+    "Youtube" : {
+        "Link" : "https://www.youtube.com/", 
+        "Artwork" : {
+            "grid - Vertical" : "f7df4b3972375bc784cd61ada708046f.jpg", 
+            "grid - Horizontal" : "98f67d0c03e88f22c2d9f2930848b8fa.jpg", 
+            "hero" : "4a9f57c5dadf5bc6555a2e754ca3cfa7.png", 
+            "logo" : "9216f34dc82ae586c1d6c37bdb8e8edf.png", 
+            "icon" : "995665640dc319973d3173a74a03860c.ico"
+        }
+    },
+    "Netflix" : {
+        "Link" : "https://www.netflix.com/", 
+        "Artwork" : {
+            "grid - Vertical" : "8db700701ae6ebeb663f433c35abeeb8.png", 
+            "grid - Horizontal" : "befe326073e97f6b4335c72e186b7369.jpg", 
+            "hero" : "d810302a6bb9bc97e7c9662b90a634a9.png", 
+            "logo" : "92757b7ebf6d8edfef5e211249a38ab5.png", 
+            "icon" : "4a06d868d044c50af0cf9bc82d2fc19f.ico"
+        }
+    },
+    "HBO Max" : {
+        "Link" : "https://www.max.com/", 
+        "Artwork" : {
+            "grid - Vertical" : "27d049f461720c8fbc869279e7da7e41.png", 
+            "grid - Horizontal" : "f045c10f3a39ac512783e0869bc45eb5.png", 
+            "hero" : "d6f07f83059edd69be854095a7ddd520.png", 
+            "logo" : "60a399eedc5ad40dbf3cd69cf3c178a6.png", 
+            "icon" : "501fe32ad8686901bb423ede39d6ce04.png"
+        }
+    },
+    "Apple TV" : {
+        "Link" : "https://tv.apple.com/", 
+        "Artwork" : {
+            "grid - Vertical" : "eff7b4b3d1cbcdc29ff8b8412d86af56.jpg", 
+            "grid - Horizontal" : "58d824c17ac25bd43fb42b087578071d.png", 
+            "hero" : "f39ab4e4f1135fd68862f122b6b22dd5.png", 
+            "logo" : "e637c9c15d72fcbeecdcf3bddc224054.png", 
+            "icon" : "7b1223235e9b545dffd56c4cac714b41.png"
+        }
+    }
+}
