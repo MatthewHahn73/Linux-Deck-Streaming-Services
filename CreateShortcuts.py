@@ -11,7 +11,7 @@ TODO
     -Need to better optimize the GrabAndSetArtworkForGivenAppIDs function 
 """
 
-import os, json, logging, random
+import os, json, logging, random, binascii, struct
 import Assets.VDF as vdf
 from urllib.request import Request, urlopen
 
@@ -29,7 +29,14 @@ def GenerateRandomAppID():
     return random.randint(0, 2147483647)
 
 #Queries steamdb for the artwork for each given streaming service and creates the file in the <User ID>/config/grid directory of the steam user
-def GrabAndSetArtworkForGivenAppIDs(ArtworkLinks, AppIDs):
+def GrabAndSetSteamArtwork(ArtworkLinks):
+    AppIDs = {}
+    ShortcutsDict = vdf.binary_load(open(PathToSteamShortcutsFile, "rb"))
+
+    for Shortcut in ShortcutsDict["shortcuts"]:
+        AppName = ShortcutsDict["shortcuts"][Shortcut]["AppName"]
+        AppID = ShortcutsDict["shortcuts"][Shortcut]["appid"]
+        AppIDs[AppName] = AppID
     for StreamingAppType in ArtworkLinks: 
         for ArtworkType in ArtworkLinks[StreamingAppType]["Artwork"]:
             ArtworkTypeParsed = ArtworkType.replace(" - Horizontal", "").replace(" - Vertical", "")
@@ -52,13 +59,12 @@ def GrabAndSetArtworkForGivenAppIDs(ArtworkLinks, AppIDs):
                             'Connection': 'close'
                         })
             ReturnedValue = urlopen(SteamGridDBRequest).read()
-
             FullFileName = str(AppIDs[StreamingAppType]) + ArtworkSuffix + ArtworkFileType
             with open(PathToUserConfig + FullFileName, "wb") as FetchedFile:
                 FetchedFile.write(ReturnedValue)
     
 #Creates a shortcuts file in the steam directory if one doesn't exist. Creates shortcut entries in the vdf file for each streaming service
-def GenerateVDFEntriesAndReturnAppIDs(StreamingServices):
+def GenerateVDFEntries(StreamingServices):
     PathToScript = "bash " + '"/home/' + User + '/.steam/steam/steamapps/common/Streaming/LaunchApp.sh"'
     PathToDirectory = '"/home/' + User + '/.steam/steam/steamapps/common/Streaming/"'
 
@@ -71,7 +77,6 @@ def GenerateVDFEntriesAndReturnAppIDs(StreamingServices):
     logging.info("Appending new items to '" + PathToSteamShortcutsFile + "' ...")
     ShortcutsDict = vdf.binary_load(open(PathToSteamShortcutsFile, "rb"))
     CurrentIteration = len(ShortcutsDict["shortcuts"])
-    CurrentAppIDList = {}
 
     for Key in StreamingServices:
         GeneratedAppID = GenerateRandomAppID()
@@ -95,19 +100,17 @@ def GenerateVDFEntriesAndReturnAppIDs(StreamingServices):
                 "tags" : {}
             }
         CurrentIteration += 1 
-        CurrentAppIDList[Key] = GeneratedAppID
     ShortcutsDictParsed = vdf.binary_dump(ShortcutsDict, open(PathToSteamShortcutsFile, "wb"))
-    return CurrentAppIDList
         
 if __name__ == "__main__":
-    logging.info("Installing firefox ...")
+    #logging.info("Installing firefox ...")
     os.system("flatpak install flathub org.mozilla.firefox -y")
 
-    logging.info("Moving the files to '" + SteamGameData + "' ...")
+    #logging.info("Moving the files to '" + SteamGameData + "' ...")
     os.makedirs(SteamGameData + "/Streaming")
     os.system("cp -a $(pwd)/Streaming " + "'" + SteamGameData + "'")
 
     with open("Assets/StreamingServices.json", "r") as StreamingFile:
         StreamingServices = json.load(StreamingFile)
-    AppIDs = GenerateVDFEntriesAndReturnAppIDs(StreamingServices)
-    GrabAndSetArtworkForGivenAppIDs(StreamingServices, AppIDs)
+    GenerateVDFEntries(StreamingServices)
+    #GrabAndSetSteamArtwork(StreamingServices)
